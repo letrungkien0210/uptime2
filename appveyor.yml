@@ -11,6 +11,9 @@ clone_depth: 10
 init:
   - git config --global core.autocrlf true
 
+services:
+  - mongodb
+
 # What combinations to test
 environment:
   matrix:
@@ -21,6 +24,8 @@ environment:
 install:
   - ps: Install-Product node $env:nodejs_version
   - npm install
+  - mongo uptime2-test --eval 'db.addUser("uptime2-test-user", "password");'
+  - mongo uptime2-dev --eval 'db.addUser("uptime2-dev-user", "password");'
 
 build: off
 
