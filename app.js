@@ -15,6 +15,12 @@ var Ping       = require('./models/ping');
 var PollerCollection = require('./lib/pollers/pollerCollection');
 var apiApp     = require('./app/api/app');
 var dashboardApp = require('./app/dashboard/app');
+//express 4 modules
+var errorhandler = require('errorhandler');
+var bodyparser =  require('body-parser');
+var cookieparser = require('cookie-parser');
+var cookiesession = require('cookie-session');
+var methodoverride = require('method-override');
 
 // database
 
@@ -28,50 +34,49 @@ a.start();
 var app = module.exports = express();
 var server = http.createServer(app);
 
-app.configure(function(){
-  app.use(app.router);
-  // the following middlewares are only necessary for the mounted 'dashboard' app, 
-  // but express needs it on the parent app (?) and it therefore pollutes the api
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.cookieParser('Z5V45V6B5U56B7J5N67J5VTH345GC4G5V4'));
-  app.use(express.cookieSession({
-    key:    'uptime',
-    secret: 'FZ5HEE5YHD3E566756234C45BY4DSFZ4',
-    proxy:  true,
-    cookie: { maxAge: 60 * 60 * 1000 }
-  }));
-  app.set('pollerCollection', new PollerCollection());
-});
+4// the following middlewares are only necessary for the mounted 'dashboard' app,
+// but express needs it on the parent app (?) and it therefore pollutes the api
+app.use(bodyparser());
+app.use(methodoverride());
+app.use(cookieparser('Z5V45V6B5U56B7J5N67J5VTH345GC4G5V4'));
+app.use(cookiesession({
+  key:    'uptime',
+  secret: 'FZ5HEE5YHD3E566756234C45BY4DSFZ4',
+  proxy:  true,
+  cookie: { maxAge: 60 * 60 * 1000 }
+}));
+app.set('pollerCollection', new PollerCollection());
 
 // load plugins (may add their own routes and middlewares)
 config.plugins.forEach(function(pluginName) {
-  var plugin = require(pluginName);
-  if (typeof plugin.initWebApp !== 'function') return;
-  console.log('loading plugin %s on app', pluginName);
-  plugin.initWebApp({
-    app:       app,
-    api:       apiApp,       // mounted into app, but required for events
-    dashboard: dashboardApp, // mounted into app, but required for events
-    io:        io,
-    config:    config,
-    mongoose:  mongoose
-  });
+var plugin = require(pluginName);
+if (typeof plugin.initWebApp !== 'function') return;
+console.log('loading plugin %s on app', pluginName);
+plugin.initWebApp({
+  app:       app,
+  api:       apiApp,       // mounted into app, but required for events
+  dashboard: dashboardApp, // mounted into app, but required for events
+  io:        io,
+  config:    config,
+  mongoose:  mongoose
+});
 });
 
 app.emit('beforeFirstRoute', app, apiApp);
 
-app.configure('development', function() {
+var env = process.env.NODE_ENV || 'development';
+if ('development' == env) {
   if (config.verbose) mongoose.set('debug', true);
   app.use(express.static(__dirname + '/public'));
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
+  app.use(errorhandler({ dumpExceptions: true, showStack: true }));
+}
 
-app.configure('production', function() {
+if ('production' == env) {
   var oneYear = 31557600000;
   app.use(express.static(__dirname + '/public', { maxAge: oneYear }));
-  app.use(express.errorHandler());
-});
+  app.use(errorhandler());
+}
+
 
 // Routes
 app.emit('beforeApiRoutes', app, apiApp);
