@@ -10,12 +10,12 @@
   </thead>
   <tbody></tbody>
 </table>
-<script src="<%= route %>/javascripts/jquery.tablesorter.min.js"></script>
-<script src="<%= route %>/javascripts/uptimeBar.js"></script>
-<script src="<%= route %>/javascripts/ejs.min.js"></script>
+<script src="/dashboard/javascripts/jquery.tablesorter.min.js"></script>
+<script src="/dashboard/javascripts/uptimeBar.js"></script>
+<script src="/dashboard/javascripts/ejs.min.js"></script>
 <script id="tag_template" type="text/template">
 <tr>
-  <td data-sort="{{= tag.name }}"><a href="{{= route + '/tags/' + encodeURIComponent(tag.name) }}">{{= tag.name }}</a></td>
+  <td data-sort="{{= tag.name }}"><a href="{{='/dashboard/tags/' + encodeURIComponent(tag.name) }}">{{= tag.name }}</a></td>
   <td data-sort="{{= tag.availability }}">{{= (tag.availability * 100).toFixed(3).replace('.000', '') }}%</td>
   <td data-sort="{{= tag.availability }}">{{- uptimeBar('tag', {
         from: Date.now() - 24 * 60 * 60 * 1000,
@@ -44,7 +44,7 @@ jQuery(document).ready(function($) {
       var lines = [];
       var lastUpdated;
       $.each(tags, function(key, tag) {
-        lines.push(ejs.render(tag_template, { tag: tag, route: '<%= route %>' }));
+        lines.push(ejs.render(tag_template, { tag: tag, route: '/dashboard' }));
         lastUpdated = tag.lastUpdated;
       });
       $('#tags tbody').html(lines.join(''));

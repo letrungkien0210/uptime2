@@ -1,10 +1,10 @@
-<script src="<%= route %>/javascripts/ejs.min.js"></script>
-<script src="<%= route %>/javascripts/bootstrap-affix.js"></script>
-<script src="<%= route %>/javascripts/dateInterval.js"></script>
-<script src="<%= route %>/javascripts/dateNavigation.js"></script>
-<script src="<%= route %>/javascripts/statNavigation.js"></script>
-<script src="<%= route %>/javascripts/uptimeBar.js"></script>
-<script src="<%= route %>/javascripts/flotr2.min.js"></script>
+<script src="/dashboard/javascripts/ejs.min.js"></script>
+<script src="/dashboard/javascripts/bootstrap-affix.js"></script>
+<script src="/dashboard/javascripts/dateInterval.js"></script>
+<script src="/dashboard/javascripts/dateNavigation.js"></script>
+<script src="/dashboard/javascripts/statNavigation.js"></script>
+<script src="/dashboard/javascripts/uptimeBar.js"></script>
+<script src="/dashboard/javascripts/flotr2.min.js"></script>
 <script>
 var ejs = require('ejs');
 ejs.open = '{{';
@@ -50,7 +50,7 @@ var page = {};
     </section>
     <section id="events">
     <h2>Downtime</h2>
-    <%- partial('_events', { url: '/api/tags/' + encodeURIComponent(tag.name) + '/events', route: route }) %>
+    <%- partial('_events', { url: '/api/tags/' + encodeURIComponent(tag.name) + '/events', route: '/dashboard' }) %>
     </section>
     <section id="responseTime">
     <%- partial('_responseTime') %>
@@ -59,10 +59,10 @@ var page = {};
     <%- partial('_responsiveness') %>
     </section>
     <section id="checks">
-    <%- partial('_checks', { url: '/api/tags/' + encodeURIComponent(tag.name) + '/checks/', route: route } ) %>
+    <%- partial('_checks', { url: '/api/tags/' + encodeURIComponent(tag.name) + '/checks/', route: '/dashboard' } ) %>
     </section>
     <section id="data">
-    <%- partial('_data', { url: '/api/tags/' + encodeURIComponent(tag.name) + '/stats/', route: route } ) %>
+    <%- partial('_data', { url: '/api/tags/' + encodeURIComponent(tag.name) + '/stats/', route: '/dashboard' } ) %>
     </section>
   </div>
 </div>

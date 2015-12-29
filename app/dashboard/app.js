@@ -14,6 +14,8 @@ var TagMonthlyStat = require('../../models/tagMonthlyStat');
 var CheckMonthlyStat = require('../../models/checkMonthlyStat');
 var moduleInfo = require('../../package.json');
 var errorhandler = require('errorhandler');
+var serveStatic = require('serve-static')
+
 
 var app = module.exports = express();
 
@@ -27,7 +29,7 @@ app.use(function locals(req, res, next) {
   res.locals.renderCssTags = function (all) {
     if (all != undefined) {
       return all.map(function(css) {
-        return '<link rel="stylesheet" href="' + app.route + '/stylesheets/' + css + '">';
+        return '<link rel="stylesheet" href="/dashboard/stylesheets/' + css + '">';
       }).join('\n ');
     } else {
       return '';
@@ -38,7 +40,7 @@ app.use(function locals(req, res, next) {
 });
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/public'));
+app.use(serveStatic(__dirname + '/public'));
 
 
 
@@ -83,7 +85,7 @@ app.post('/checks', function(req, res, next) {
   check.save(function(err) {
     if (err) return next(err);
     req.flash('info', 'New check has been created');
-    res.redirect(app.route + (req.body.saveandadd ? '/checks/new' : ('/checks/' + check._id + '?type=hour&date=' + Date.now())));
+    res.redirect('/dashboard'+ (req.body.saveandadd ? '/checks/new' : ('/checks/' + check._id + '?type=hour&date=' + Date.now())));
   });
 });
 
@@ -130,7 +132,7 @@ app.put('/checks/:id', function(req, res, next) {
     check.save(function(err2) {
       if (err2) return next(err2);
       req.flash('info', 'Changes have been saved');
-      res.redirect(app.route + '/checks/' + req.params.id);
+      res.redirect('/dashboard/checks/' + req.params.id);
     });
   });
 });
@@ -142,7 +144,7 @@ app.delete('/checks/:id', function(req, res, next) {
     check.remove(function(err2) {
       if (err2) return next(err2);
       req.flash('info', 'Check has been deleted');
-      res.redirect(app.route + '/checks');
+      res.redirect('/dashboard/checks');
     });
   });
 });

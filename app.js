@@ -34,7 +34,7 @@ a.start();
 var app = module.exports = express();
 var server = http.createServer(app);
 
-4// the following middlewares are only necessary for the mounted 'dashboard' app,
+// the following middlewares are only necessary for the mounted 'dashboard' app,
 // but express needs it on the parent app (?) and it therefore pollutes the api
 app.use(bodyparser());
 app.use(methodoverride());

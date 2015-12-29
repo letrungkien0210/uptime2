@@ -4,8 +4,8 @@
 <script id="check_template" type="text/template">
 <li>
 <div class="name">
-    <a href="{{=  route + '/checks/' + stat.check._id +'?type=' + type + '&date=' + date }}">{{= stat.check.name }}</a>
-    <a href="{{= stat.check.url }}" target="_blank"><img src="{{= route }}/images/external-link-ltr-icon.png"></a>
+    <a href="<%='/dashboard/checks/' + stat.check._id +'?type=' + type + '&date=' + date %>"><%= stat.check.name %></a>
+    <a href="{{= stat.check.url }}" target="_blank"><img src="/dashboard/images/external-link-ltr-icon.png"></a>
 </div>
 {{- uptimeBar('check', {
         from: begin,
@@ -27,7 +27,7 @@ $(document).ready(function() {
     $.getJSON('<%= url %>' + dateInterval.type + '/' + dateInterval.date, function(stats) {
       var bars = [];
       $.each(stats, function(index, stat) {
-        bars.push(ejs.render(check_template, { stat: stat, type: dateInterval.type, date: dateInterval.date, begin: dateInterval.begin.valueOf(), end: dateInterval.end.valueOf(), route: '<%= route %>' }))
+        bars.push(ejs.render(check_template, { stat: stat, type: dateInterval.type, date: dateInterval.date, begin: dateInterval.begin.valueOf(), end: dateInterval.end.valueOf(), route: '/dashboard' }))
       });
       $('#checkUptimeBars').html(bars.join(''));
     });

@@ -1,4 +1,4 @@
-<script src="<%= route %>/javascripts/checkState.js"></script>
+<script src="/dashboard/javascripts/checkState.js"></script>
 <div style="float: right;">
   <span id="check_24h"></span>
 </div>
@@ -6,7 +6,7 @@
 <% if (info.length) { %>
 <div class="alert alert-success"><%= info %></div>
 <% } %>
-<%- partial('_check_details', { check: check, pollerCollection: pollerCollection, pollerDetails: pollerDetails, route: route }) %>
+<%- partial('_check_details', { check: check, pollerCollection: pollerCollection, pollerDetails: pollerDetails, route: '/dashboard' }) %>
 <div>
 </div>
 <script>
