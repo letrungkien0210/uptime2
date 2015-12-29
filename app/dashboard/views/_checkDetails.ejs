@@ -1,7 +1,6 @@
 <% addedCss.push('jquery.tagsinput.css') %>
 <div class="tab-pane" id="admin">
-  <form id="check_form" method="post" class="form-horizontal" action="/dashboard/checks<%= check.isNew ? '' : '/' + check._id %>">
-    <input type="hidden" name="_method" value="<%= (check.isNew) ? 'post' : 'put' %>" />
+  <form id="check_form" method="<%= (check.isNew) ? 'post' : 'put' %>" class="form-horizontal" action="/dashboard/checks<%= check.isNew ? '' : '/' + check._id %>">
 
     <div class="row">
 
