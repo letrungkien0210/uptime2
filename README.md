@@ -3,19 +3,19 @@ uptime2
 
 A remote monitoring application using Node.js, MongoDB, and Twitter Bootstrap.
 
-<img src="https://raw.github.com/gunmetal313-nodejs/uptime2/downloads/check_details.png" title="Visualizing the availability of an HTTP check in Uptime" width="50%" valign="top" />
-<img src="https://raw.github.com/gunmetal313-nodejs/uptime2/downloads/check_form.png" title="Editing check attributes (polling interval, slow threshold, alert threshold, pattern to match, tags) in Uptime" width="50%" valign="top" />
+<img src="https://raw.github.com/endticket/uptime2/downloads/check_details.png" title="Visualizing the availability of an HTTP check in Uptime" width="50%" valign="top" />
+<img src="https://raw.github.com/endticket/uptime2/downloads/check_form.png" title="Editing check attributes (polling interval, slow threshold, alert threshold, pattern to match, tags) in Uptime" width="50%" valign="top" />
 
 You can watch a [demo screencast on Vimeo](https://vimeo.com/39302164).
 
 I am new unofficial maintainer of this project.
 
-[![Dependency Status](https://david-dm.org/gunmetal313-nodejs/uptime2.svg)](https://david-dm.org/gunmetal313-nodejs/uptime2)
-[![devDependency Status](https://david-dm.org/gunmetal313-nodejs/uptime2/dev-status.svg)](https://david-dm.org/gunmetal313-nodejs/uptime2#info=devDependencies)
+[![Dependency Status](https://david-dm.org/endticket/uptime2.svg)](https://david-dm.org/endticket/uptime2)
+[![devDependency Status](https://david-dm.org/endticket/uptime2/dev-status.svg)](https://david-dm.org/endticket/uptime2#info=devDependencies)
 
 | Build cl  | Status  | Branch| .... |
 |-------|---------|---------|--------|
-|Travis (Linux)| [![Build Status](https://travis-ci.org/gunmetal313-nodejs/uptime2.svg?branch=master)](https://travis-ci.org/gunmetal313-nodejs/uptime2) | master |  |
+|Travis (Linux)| [![Build Status](https://travis-ci.org/endticket/uptime2.svg?branch=master)](https://travis-ci.org/endticket/uptime2) | master |  |
 
 
 Features
