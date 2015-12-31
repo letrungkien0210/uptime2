@@ -24,10 +24,11 @@
     "semver": "5.1.0",
     "serve-static": "^1.10.0",
     "socket.io": "0.9.14",
+    "twilio": "^2.8.0",
     "webpagetest": "0.2.0"
   },
   "devDependencies": {
-    "mocha": "1.7.x",
+    "mocha": "^1.7.4",
     "should": "1.1.0"
   },
   "keywords": [
