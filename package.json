@@ -23,6 +23,7 @@
     "nodemailer": "0.3.35",
     "semver": "5.1.0",
     "serve-static": "^1.10.0",
+    "slack-node": "^0.1.7",
     "socket.io": "0.9.14",
     "twilio": "^2.8.0",
     "webpagetest": "0.2.0"
