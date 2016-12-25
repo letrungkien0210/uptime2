@@ -25,7 +25,24 @@ app.use(partials());
 app.use(flash());
 app.use(function locals(req, res, next) {
   res.locals.route = app.route;
-  res.locals.addedCss = [];
+  res.locals.addedCss = [
+                        //GLOBAL MANDATORY STYLES-------------------------------
+                        'plugins/font-awesome/css/font-awesome.min.css',
+                        'plugins/simple-line-icons/simple-line-icons.min.css', 
+                        'plugins/bootstrap/css/bootstrap.min.css',
+                        'plugins/bootstrap-switch/css/bootstrap-switch.min.css',
+                        // PAGE LEVEL PLUGINS-----------------------------------
+                        'plugins/bootstrap-daterangepicker/daterangepicker.min.css',
+                        'plugins/morris/morris.css',
+                        'plugins/fullcalendar/fullcalendar.min.css',
+                        'plugins/jqvmap/jqvmap.css',
+                        //THEME GLOBAL STYLES-----------------------------------
+                        'components-md.min.css',
+                        'plugins-md.min.css',
+                        //THEME LAYOUT STYLES-----------------------------------
+                        'layout.min.css',
+                        'custom.min.css'
+                        ];
   res.locals.renderCssTags = function (all) {
     if (all != undefined) {
       return all.map(function(css) {
