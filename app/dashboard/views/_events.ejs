@@ -2,7 +2,7 @@
       </div>
 
 <script id="event_template" type="text/template">
-<tr>
+<tr class="{{= highlightFrom && date.valueOf() > highlightFrom ? 'warning' : ''}}">
             <td><span class="label bg-default bg-font-default" title="{{= date }}">{{= date.format('LT') }}</span></td>
             <td>
               {{ var label = (event.message == 'paused' || event.message == 'restarted') ? 'bg-blue bg-font-blue' : (event.message == 'up') ? 'bg-green-jungle bg-font-green-jungle' : 'bg-red-mint bg-font-red-mint' }}
@@ -64,7 +64,7 @@ $(document).ready(function() {
           <thead class="flip-content">
             <tr>
               <th width="10%">Time</th>
-              <th>Status</th>
+              <th width="10%">Status</th>
               <th>URL</th>
             </tr>
           </thead>
