@@ -41,7 +41,8 @@ app.use(function locals(req, res, next) {
         'plugins-md.min.css',
         //THEME LAYOUT STYLES-----------------------------------
         'layout.css',
-        'custom.min.css'
+        'custom.min.css',
+        'style.css'
     ];
     res.locals.renderCssTags = function(all) {
         if (all != undefined) {
