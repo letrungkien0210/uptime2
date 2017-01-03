@@ -11,7 +11,7 @@
 </div>
 <script>
 $(document).ready(function() {
-  $('.navbar-inner li').eq(0).addClass('active');
+  $('.sub-menu li').eq(0).addClass('active');
   $.getJSON('/api/checks/count', function(nbChecks) {
     if (nbChecks.total == 0) {
       $('#events').hide();
