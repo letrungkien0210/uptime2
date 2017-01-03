@@ -1,9 +1,9 @@
 <% addedCss.push('jquery.tagsinput.css') %>
-<from id="check_form" role="form" class="form-horizontal" method="<%= (check.isNew) ? 'post' : 'put' %>" action="/dashboard/checks<%= check.isNew ? '' : '/' + check._id %>">
+<form id="check_form" role="form" class="form-horizontal" method="<%= (check.isNew) ? 'post' : 'put' %>" action="/dashboard/checks<%= check.isNew ? '' : '/' + check._id %>">
   <div class="form-body">
     <div class="form-group form-md-line-input">
       <label class="col-md-2 control-label" for="form_control_url">Url</label>
-      <div class="col-md-2">
+      <div class="col-md-10">
         <div class="input-group input-group-sm">
           <div class="input-group-control">
             <input type="text" required name="check[url]" value="<%= check.url || '' %>" class="form-control input-sm" id="form_control_url" placeholder="http://www.example.com"/>
@@ -31,7 +31,7 @@
 
     <div class="form-group form-md-line-input">
       <label class="col-md-2 control-label" for="form_control_name">Name</label>
-      <div class="col-md-2">
+      <div class="col-md-10">
         <input type="text" name="check[name]" value="<%= check.name || '' %>" class="form-control" id="form_control_name" placeholder="Type a name here">
         <div class="form-control-focus"> </div>
       </div>
@@ -39,15 +39,15 @@
 
     <div class="form-group form-md-line-input">
       <label class="col-md-2 control-label" for="form_control_polling_interval">Polling interval</label>
-      <div class="col-md-2">
+      <div class="col-md-6">
         <div class="input-group">
           <% if (check.lastTested) { %>
           <span class="input-group-btn btn-left">
             <button class="btn" name="pause" type="button"><i class="fa fa-<%= check.isPaused ? 'play' : 'pause' %>"></i></button>
           </span>
-          <% }%>
-          <input type="text" name="check[interval]" value="<%= (check.interval / 1000).toFixed() %>" class="form-control input-sm" id="form_control_polling_interval"/>
-          <div class="form-control-focus"> </div>
+          <% } %>
+          <input type="text" name="check[interval]" value="<%= (check.interval / 1000).toFixed() %>" class="form-control" id="form_control_polling_interval"/>
+          <div class="form-control-focus"></div>
           <span class="input-group-addon">s</span>
         </div>
       </div>
@@ -55,7 +55,7 @@
 
     <div class="form-group form-md-line-input">
       <label class="col-md-2 control-label" for="form_control_slow_threshold">Slow threshold</label>
-      <div class="col-md-2">
+      <div class="col-md-6">
         <div class="input-group">
           <input type="text" name="check[maxTime]" value="<%= check.maxTime %>" class="form-control input-sm" id="form_control_slow_threshold"/>
           <div class="form-control-focus"></div>
@@ -66,7 +66,7 @@
 
     <div class="form-group form-md-line-input">
       <span class="col-md-2 control-label" for="form_control_alert_threshold">Alert threshold</span>
-      <div class="col-md-2">
+      <div class="col-md-6">
         <div class="input-group">
           <input type="text" name="check[alertTreshold]" vale="<%= check.alertTreshold %>" class="form-control input-sm" id="form_control_alert_threshold"/>
           <div class="form-control-focus"></div>
@@ -81,7 +81,7 @@
 
     <div class="form-group form-md-line-input">
       <label class="col-md-2 control-label">Tags</label>
-      <div class="col-md-2">
+      <div class="col-md-10">
         <textarea name="check[tags]" class="form-control" rows="2"><%= check.tags.join(', ') %></textarea>
         <div class="form-control-focus"></div>
       </div>
@@ -91,7 +91,7 @@
     <div class="form-group form-md-line-input">
       <label class="col-md-2 control-label" for="form_control_last_edited">Last edited on</label>
       <div class="col-md-2">
-        <input type="text" class="form-control" disabled id="form_control_last_edited" value="<%= check.lastTested.getTime() %>"/>
+        <div class="form-control form-control-static" id="form_control_last_edited"><%= check.lastTested.getTime() %></div>
         <div class="form-control-focus"></div>
       </div>
     </div>
@@ -114,11 +114,11 @@
     </div>
     
   </div>
-</from>
+</form>
 
 <!-- <script src="/dashboard/javascripts/jquery.tagsinput.min.js"></script> -->
 <script>
-var intervalFieldSelector = 'form input[name="check\\[interval\\]"]';
+var intervalFieldSelector = '#check_form input[name="check\\[interval\\]"]';
 function updatePollingIntervalTooltip() {
   var value = $(intervalFieldSelector).val();
   if (value > 60 ) {
@@ -130,7 +130,7 @@ function updatePollingIntervalTooltip() {
   }
 }
 $(document).ready(function() {
-  $('.uneditable-input').text(moment(parseInt($('.uneditable-input').html())).format('LLLL'));
+  $('#form_control_last_edited').text(moment(parseInt($('#form_control_last_edited').html())).format('LLLL'));
   $('#check_form button[name="delete"]').click(function() {
     if (!confirm("This will delete the check and related pings and stats.\nAre you sure?")) return false;
     $('#check_form input[name="_method"]').val('delete');
