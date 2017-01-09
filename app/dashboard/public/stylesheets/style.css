@@ -222,10 +222,11 @@ table.ping .error {
   top: 0;
   background-color: white;
   z-index: 50;
+  width: calc(100% - 327px);
 }
 #secondaryNav.affix {
   top: 91px;
-  width: 140px;
+  width: calc(100% - 1667px);
 }
 i.icon-chevron-right {
   float: right;
@@ -243,8 +244,8 @@ i.icon-chevron-right {
   vertical-align: inherit;
 }
 #dateNavigation .timeline {
-  margin-left: 29px;
   height: 22px;
+  margin: 0 0 0 35px;
 }
 .btn-small.month, .btn-small.day, .btn-small.hour, .btn-small.quarter {
   padding-right: 0;
@@ -288,4 +289,8 @@ ul.nav-tabs li span {
 }
 #check_24h + a.btn {
   margin-left: 10px;
+}
+.nav-tab.nav-stacked > li:first-child > a {
+  -webkit-border-top-right-radius: 4px;
+  -webkit-border-top-left-radius: 4px;
 }

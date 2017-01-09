@@ -29,7 +29,7 @@ app.use(function locals(req, res, next) {
         //GLOBAL MANDATORY STYLES-------------------------------
         'plugins/font-awesome/css/font-awesome.min.css',
         'plugins/simple-line-icons/simple-line-icons.min.css',
-        'plugins/bootstrap/css/bootstrap.min.css',
+        'plugins/bootstrap/css/bootstrap.css',
         'plugins/bootstrap-switch/css/bootstrap-switch.min.css',
         // PAGE LEVEL PLUGINS-----------------------------------
         'plugins/bootstrap-daterangepicker/daterangepicker.min.css',

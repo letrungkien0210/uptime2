@@ -25,33 +25,43 @@ ejs.close = '}}';
 <div id="dateNavigationContainer">
   <div id="dateNavigation">
     <div class="row">
-      <div class="span2"></div>
-      <div class="span10">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-10">
         <div class="title"></div>
         <div class="timeline"></div>
       </div>
     </div>
     <div class="row">
-      <div class="span2">
-        <ul class="btn-group zoom"></ul>
+      <div class="col-lg-2">
+        <ul class="btn-group zoom" style="margin-bottom:3px"></ul>
       </div>
-      <div class="span10">
+      <div class="col-lg-10">
         <div class="periods"></div>
       </div>
     </div>
   </div>
 </div>
 <div id="sectionList" class="row">
-  <div class="span2">
-    <ul id="secondaryNav" class="nav nav-tabs nav-stacked">
-      <li><a href="#availability" title="Percentage of uptime over the period">Availability<i class="icon-chevron-right"></i><br/><strong class="availability"></strong>%</a></li>
-      <li><a href="#events">Downtime<i class="icon-chevron-right"></i><br/><strong class="downtime"></strong></a></li>
-      <li><a href="#responseTime" title="Average response time over the period">Response Time<i class="icon-chevron-right"></i><br/><strong class="avgRespTime"></strong>ms</a></li>
-      <li><a href="#responsiveness" title="Percentage of pings above slow treshold over the period">Responsiveness<i class="icon-chevron-right"></i><br/><strong class="responsiveness"></strong>%</a></li>
-      <li><a href="#data">Data<i class="icon-chevron-right"></i></a></li>
+  <div class="col-lg-2">
+    <ul id="secondaryNav" class="nav nav-pills tabs-left" style="border-right:0;">
+      <li style="float:none">
+        <a href="#availability" title="Percentage of uptime over the period">Availability<i class="fa fa-chevron-right" style="float:right"></i><br/><strong class="availability"></strong>%</a>
+      </li>
+      <li style="float:none">
+        <a href="#events" >Downtime<i class="fa fa-chevron-right" style="float:right"></i><br/><strong class="downtime"></strong></a>
+      </li>
+      <li style="float:none">
+        <a href="#responseTime" title="Average response time over the period">Response Time<i class="fa fa-chevron-right" style="float:right"></i><br/><strong class="avgRespTime"></strong>ms</a>
+      </li>
+      <li style="float:none">
+        <a href="#responsiveness" title="Percentage of pings above slow treshold over the period">Responsiveness<i class="fa fa-chevron-right" style="float:right"></i><br/><strong class="responsiveness"></strong>%</a>
+      </li>
+      <li style="float:none">
+        <a href="#data">Data<i class="fa fa-chevron-right" style="float:right"></i></a>
+      </li>
     </ul>
   </div>
-  <div class="span10">
+  <div class="col-lg-10">
     <section id="availability">
     <%- partial('_availability') %>
     </section>
@@ -81,6 +91,8 @@ var dateInterval = new DateInterval(
 jQuery(document).ready(function($) {
   // highlight current section in main nav
   $('.sub-menu li').eq(1).addClass('active');
+  //highlight the first tab in secondary navigation
+  $('#secondaryNav li').eq(0).addClass('active');
   
   // update check state live
   updateCheckState(<%- JSON.stringify(check) %>);
@@ -124,4 +136,16 @@ jQuery(document).ready(function($) {
     }
   }, 15 * 60 * 1000);
 });
+
+function active(){
+  var tabLinks;
+
+  tabLinks = $('#secondaryNav li');
+  for(var i = 0; i < tabLinks.length; i++){
+    tabLinks.eq(i).removeClass('active');
+  }
+  $(this).parent().addClass('active');
+}
+$('#secondaryNav li a').on('click', active);
+    
 </script>
